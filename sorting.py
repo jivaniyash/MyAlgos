@@ -36,3 +36,48 @@ def insertion_sort(array: list):
                 break
     
     return array
+
+def merge_sort(array: list):
+    
+    def divide(array, li, ri): # divide array into subarray
+        subarray = array[li:ri]
+        if len(subarray) > 1:
+            mid_index = len(subarray) // 2
+
+            divide(array, li, li+mid_index) # left 
+            divide(array, li+mid_index, ri) # right 
+
+            merge(array, li, mid_index, ri) # merge subarrays & sort them
+
+    def merge(array, li, mid_index, ri): # merge & sort subarray
+        
+        left_sub = array[li:li+mid_index]
+        right_sub = array[li+mid_index:ri]
+
+        # initiate left & right indexes to 0 & main array index to left_index (li)
+        left_idx = right_idx = 0
+        idx = li
+
+        while left_idx < len(left_sub) and right_idx < len(right_sub): #loop until every item is merged and sorted
+            if left_sub[left_idx] < right_sub[right_idx]: # if element of left array is less than right array
+                array[idx] = left_sub[left_idx]
+                left_idx += 1 # increment by 1 
+            else: # if element of right array is less than left array
+                array[idx] = right_sub[right_idx]
+                right_idx += 1 
+            idx += 1
+            
+        # if there are any remaining items in left or right
+        
+        while left_idx < len(left_sub):
+            array[idx] = left_sub[left_idx]
+            left_idx += 1
+            idx += 1
+        
+        while right_idx < len(right_sub):
+            array[idx] = right_sub[right_idx]
+            right_idx += 1
+            idx += 1
+        
+    divide(array, 0, len(array))
+    return array
