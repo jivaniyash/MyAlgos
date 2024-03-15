@@ -5,8 +5,8 @@ File to test Sorting Algorithms for 5 different test cases
 import pytest
 from sorting import *
 
-# _sort_funct can be ["bubble_sort", "selection_sort"]
-_sort_funct = selection_sort
+# _sort_funct can be ["bubble_sort", "selection_sort", "insertion_sort"]
+_sort_funct = insertion_sort
 
 # sorting Function to test it with 5 test cases
 def test_case_1():

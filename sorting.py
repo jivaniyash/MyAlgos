@@ -24,4 +24,15 @@ def selection_sort(array: list):
         array[i], array[temp_min_index] = array[temp_min_index], array[i]
     
     return array
-            
+
+def insertion_sort(array: list):
+    # loop through array consider each element & swap it the left value if its smaller until left most
+    for i in range(len(array)-1):
+        # if array[i+1] < array[i]:
+        for j in range(i+1,0,-1): # loop through current index to start (backwards)
+            if array[j] < array[j-1]:
+                array[j], array[j-1] = array[j-1], array[j]
+            else:
+                break
+    
+    return array
