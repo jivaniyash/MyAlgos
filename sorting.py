@@ -81,3 +81,36 @@ def merge_sort(array: list):
         
     divide(array, 0, len(array))
     return array
+
+def quick_sort(array: list):
+    # sorts array by picking pivot and calling recursively to make elements which are less than pivot to left and greater than pivot to right.
+
+    def make_partition(array, left_index, right_index):
+        # makes partition by swapping elements after comparing and returns the index of the pivot
+        # pivot is always to the extreme right
+
+        temp_pointer = left_index
+
+        for i in range(left_index, right_index): # loop through each element
+
+            if array[i] < array[right_index]: # compare if current element is less than pivot element
+                array[i], array[temp_pointer] = array[temp_pointer], array[i] # swap with the temp_pointer
+
+                # and move temp pointer to next index
+                temp_pointer += 1
+            
+        # swap pivot with the correct location
+        array[right_index], array[temp_pointer] = array[temp_pointer], array[right_index]
+            
+        return temp_pointer
+    
+    def recursive_call(array, left_index, right_index):
+        if left_index < right_index:
+            pivot = make_partition(array, left_index, right_index) # find pivot element from above function
+
+            recursive_call(array, left_index, pivot-1) # left partition to sort
+
+            recursive_call(array, pivot+1, right_index) # right partition to sort
+
+    recursive_call(array, 0, len(array)-1)
+    return array
